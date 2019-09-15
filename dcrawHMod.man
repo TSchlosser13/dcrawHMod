@@ -1,0 +1,101 @@
+.\" dcrawHMod.man
+
+
+.TH man 1 "18. Juli 2016" "1.0" "dcrawHMod Man Page"
+
+
+.SH NAME
+dcrawHMod
+
+.SH SYNOPSIS
+.B dcrawHMod
+.B -v -w -q HMod
+<HMod=(0-11)> <order=(1-7)> <rad=(>0.0f)> [
+.B HWB
+<HWB=(0-8)> [ <HWB_Y=(>0.0f)> ] ] [
+.B HGC
+] [
+.B HFBs
+<HFBs_a=(>0.0f)> <HFBs_mod=(>0.0f)> ]
+
+.SH DESCRIPTION
+Hexagonal Image Processing Framework CHIP in dcraw
+
+
+.SH OPTIONS
+
+.IP -q
+Interpolationsmethode dcraw:
+ - 0: -- (ohne)
+ - 1: Bilinear
+ - 2: VNG
+ - 3: PPG
+ - 4: AHD
+ - 5: "AHD interpolation with built-in anti-aliasing feature"
+
+.IP <HMod=(0-11)>
+Interpolationsmethode HMod:
+ - 0:  Nearest: reals
+ - 1:  Nearest: spatials
+ - 2:  CHIP: bilinear
+ - 3:  CHIP: bicubic
+ - 4:  CHIP: Lanczos
+ - 5:  CHIP: B-Splines (B_3)
+ - 6:  Pixel averaging
+ - 7:  Bilinear
+ - 8:  Bicubic
+ - 9:  Lanczos
+ - 10: B-Splines (B_3)
+ - 11: Hex. AVG ( 2R4G2B;
+.B ohne <rad>
+)
+
+.IP <order=(1-7)>
+Ordnung Hexarray
+
+.IP <rad=(>0.0f)>
+Radius Interpolation
+
+.IP <HWB=(0-8)>
+Hexagonal White Balance (HWB):
+ - 0: Y *=  1.1f;
+ - 1: Y  = <ALL_MAX>
+ - 2: Y  = <ALL_AVG>
+ - 3: Y  = <49P_MAX>
+ - 4: Y  = <49P_AVG>
+ - 5: Y  =  <7P_MAX>
+ - 6: Y  =  <7P_AVG>
+ - 7: Y  = 64.0f;
+ - 8: Y  = <HWB_Y>
+.B (siehe <HWB_Y>)
+
+.IP <HWB_Y=(>0.0f)>
+Neue Luminanz (gesamtes Bild)
+
+.TP
+.B HGC
+Hexagonal Gamma Correction (HGC)
+
+.IP <HFBs_a=(>0.0f)>
+Hexagonal Filter Banks (HFBs):
+ Größe des Trägers (typischerweise 2 oder 3)
+
+.IP <HFBs_mod=(>0.0f)>
+(<1.0f) = blurring*, sonst = un-
+.B (siehe <HFBs_a>)
+
+
+.SH EXAMPLE
+ ./dcrawHMod -v -w -q 0 HMod 11 7 1.0 HGC 583A0735.cr2
+
+.SH SEE ALSO
+.B CHIP(1), Hex-Muxer(1), Hex-Player(1), HMEC(1), Nexys-Video-HDMIHMod(1), x264HMod(1)
+
+.SH BUGS
+-
+
+.SH AUTHOR
+Tobias Schlosser (tobias.schlosser@informatik.tu-chemnitz.de)
+
+.SH COPYING
+Siehe Datei "COPYING"
